@@ -1,0 +1,104 @@
+@startuml
+
+abstract Element {
+        owner: Element
+        position: Vector2
+        size: Vector2
+        theme
+        handle_input(event)
+        add_child(Element)
+        get_children(): Element[]
+        remove_child(Element)
+}
+
+abstract BaseButton {
+        hovered
+        pressed
+        disabled
+}
+BaseButton --|> Element
+
+class Button {
+        text
+}
+Button --|> BaseButton
+
+class TextureButton {
+        texture
+}
+TextureButton --|> BaseButton
+
+class CheckBox {
+}
+CheckBox --|> BaseButton
+
+class ToggleButton {
+}
+ToggleButton --|> BaseButton
+
+class OptionButton {
+        get_items : List
+        remove_item(id)
+        add_item(string)
+}
+OptionButton --|> BaseButton
+
+abstract Container {
+        -fit_child_element
+}
+Container --|> Element
+
+class MarginContainer {
+}
+MarginContainer --|> Container
+
+class CenterContainer {
+}
+CenterContainer --|> Container
+
+class GridContainer {
+        columns
+}
+GridContainer --|> Container
+
+class ScrollContainer {
+}
+ScrollContainer --|> Container
+
+abstract RangeElement {
+        value
+        min_value
+        max_value
+        step
+}
+Element <|-- RangeElement
+
+class ScrollBar {
+}
+RangeElement <|-- ScrollBar
+
+class SpinBox {
+}
+RangeElement <|-- SpinBox
+
+class Slider {
+}
+RangeElement <|-- Slider
+
+class ProgressBar {
+}
+RangeElement <|-- ProgressBar
+
+class TextBox {
+        text
+}
+Element <|-- TextBox
+
+class TextEdit {
+        caret_line
+        caret_column
+        paste(string)
+}
+TextBox <|-- TextEdit
+
+@enduml
